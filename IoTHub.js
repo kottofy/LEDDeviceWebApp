@@ -1,12 +1,30 @@
-'use strict';
-
 var Client = require('azure-iothub').Client;
 var Message = require('azure-iot-common').Message;
 
 var connectionString = process.env["connectionString"];
 var targetDevice = process.env["targetDevice"];
 
-var serviceClient = Client.fromConnectionString(connectionString);
+module.exports = {
+    sendMessage: function(color) {
+    var client = Client.fromConnectionString(connectionString);
+    
+    client.open(function (err) {
+      if (err) {
+        console.log('Could not connect: ' + err.message);
+      } else {
+        console.log('Client connected');
+        client.getFeedbackReceiver(receiveFeedback);
+        var message = new Message(JSON.stringify({
+            deviceId: 'LEDDevice',
+            color: color
+        }));        
+        message.ack = 'full';          
+        console.log('Sending message: ' + message.getData() + ' to ' + targetDevice);
+        client.send(targetDevice, message, printResultFor('send'));
+      }
+    });
+    }
+}
 
 function printResultFor(op) {
     return function printResult(err, res) {
@@ -21,25 +39,3 @@ function receiveFeedback(err, receiver) {
         console.log(msg.getData().toString('utf-8'));
     }); 
 }
-
-module.exports = {
-    sendMessage: function(color) {
-        serviceClient.open(function (err) {
-            if (err) {
-                console.error('Could not connect: ' + err.message);
-            } else {
-                console.log('Service client connected');
-                serviceClient.getFeedbackReceiver(receiveFeedback);
-                // var message = new Message(color.toString());
-                var message = new Message(JSON.stringify({
-                    deviceId: 'LEDDevice',
-                    color: color
-                }));                
-                message.ack = 'full';
-                console.log('Sending message: ' + message.getData());
-                serviceClient.send(targetDevice, message, printResultFor('send'));
-            }
-        });
-    }
-};
-
