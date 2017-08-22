@@ -1,0 +1,35 @@
+extends layout
+
+block content
+    h1= title
+
+    script(src="/js/jscolor.min.js")
+    script(src="/js/client.js")
+
+    <html>    
+
+        <form  action="/" method="post">
+            <input type="hidden" name="rainbow" value="rainbow">
+            <input type="submit" value="Rainbow"  ></button>
+        </form> 
+
+        </br></br>
+        
+        <form action="/" method="post">
+            <input type="hidden" name="rainbow" value="rainbowCycle">
+            <input type="submit" value="Rainbow Cycle"></button> 
+        </form> 
+
+        </br></br></br></br>
+
+        <form id="sendForm" name="sendColor" action="/" method="post">
+            <input class="jscolor {onFineChange:'DoThis(this)'}"></input></br></br>
+            <input type="submit"></br></br>
+
+            //- <p name="color1" id="rgb-str"></p>
+            <p>Red: </p><input name="red" id="red"></input>
+            <p>Green: </p><input name="green" id="green"></input>
+            <p>Blue: </p><input name="blue" id="blue"></input>
+
+        </form>
+    </html> 
