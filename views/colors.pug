@@ -8,20 +8,35 @@ block content
 
     <html>    
 
-        <form  action="/" method="post">
+        <form action="/" method="post">
             <input type="hidden" name="rainbow" value="rainbow">
-            <input type="submit" value="Rainbow"  ></button>
+            <input type="submit" value="Rainbow"> 
         </form> 
 
-        </br></br>
+        </br>
         
         <form action="/" method="post">
             <input type="hidden" name="rainbow" value="rainbowCycle">
-            <input type="submit" value="Rainbow Cycle"></button> 
+            <input type="submit" value="Rainbow Cycle"> 
+        </form> 
+        
+        </br>
+        
+        <form action="/" method="post">
+            <input type="hidden" name="rainbow" value="start">
+            <input type="submit" value="RGB"> 
+        </form> 
+        
+        </br>
+        
+        <form action="/" method="post">
+            <input type="hidden" name="rainbow" value="stop">
+            <input type="submit" value="Stop"> 
         </form> 
 
-        </br></br></br></br>
+        </br></br>
 
+        <h2>Solid Color:</h2>
         <form id="sendForm" name="sendColor" action="/" method="post">
             <input class="jscolor {onFineChange:'DoThis(this)'}"></input></br></br>
             <input type="submit"></br></br>

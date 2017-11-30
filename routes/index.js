@@ -14,32 +14,37 @@ router.get('/', function (req, res) {
     res.render('colors', { title: 'Colors' });
 });
 
+//TODO WHY DO I HAVE TWO ROUTES FOR THE SAME THING BRAIN!?
 router.post('/', function (req, res) {
     console.log("rainbow: " + req.body.rainbow);
 
-    // TODO - not working for rainbow and rainbow cycle
-    if (req.body.rainbow == "rainbow"){
+    if (req.body.rainbow == "rainbow") {
         iothub.sendMessage("rainbow");
     }
-    else if(req.body.rainbow == "rainbowCycle") {
+    else if (req.body.rainbow == "rainbowCycle") {
         iothub.sendMessage("rainbowCycle");
     }
+    else if(req.body.rainbow == "start") {
+        console.log("sending start");
+        iothub.sendMessage("start");
+    }
+    else if(req.body.rainbow == "stop") {
+        console.log("sending stop");        
+        iothub.sendMessage("stop");
+    }
     else {
+        console.log("sending solid color");
+
         var rgb = {
-            'red': req.body.red,
-            'green': req.body.green,
-            'blue' : req.body.blue
+            red: req.body.red,
+            green: req.body.green,
+            blue: req.body.blue
         };
 
-        if (JSON.stringify == "{}") {
-            console.log("empty");
-        }
-        else {
-            console.log("color: " + JSON.stringify(rgb));
-            iothub.sendMessage(rgb);
-        }
+        console.log("color: " + JSON.stringify(rgb));
+        iothub.sendMessage(rgb);
     }
-   
+
     res.render('colors', { title: 'Colors' });
 });
 
