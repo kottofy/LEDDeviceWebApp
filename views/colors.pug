@@ -23,8 +23,15 @@ block content
         </br>
         
         <form action="/" method="post">
-            <input type="hidden" name="rainbow" value="start">
-            <input type="submit" value="RGB"> 
+            <input type="hidden" name="rainbow" value="rgb">
+            <input type="submit" value="rgb"> 
+        </form> 
+
+        </br>
+        
+        <form action="/" method="post">
+            <input type="hidden" name="rainbow" value="holiday">
+            <input type="submit" value="holiday"> 
         </form> 
         
         </br>
@@ -36,7 +43,7 @@ block content
 
         </br></br>
 
-        <h2>Solid Color:</h2>
+        <h2>Solid Color</h2>
         <form id="sendForm" name="sendColor" action="/" method="post">
             <input class="jscolor {onFineChange:'DoThis(this)'}"></input></br></br>
             <input type="submit"></br></br>
@@ -47,4 +54,7 @@ block content
             <p>Blue: </p><input name="blue" id="blue"></input>
 
         </form>
+
+        <br></br>
+
     </html> 

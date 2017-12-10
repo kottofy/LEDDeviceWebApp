@@ -24,13 +24,17 @@ router.post('/', function (req, res) {
     else if (req.body.rainbow == "rainbowCycle") {
         iothub.sendMessage("rainbowCycle");
     }
-    else if(req.body.rainbow == "start") {
-        console.log("sending start");
-        iothub.sendMessage("start");
+    else if(req.body.rainbow == "rgb") {
+        console.log("sending rgb");
+        iothub.sendMessage("rgb");
     }
     else if(req.body.rainbow == "stop") {
         console.log("sending stop");        
         iothub.sendMessage("stop");
+    }
+    else if(req.body.rainbow == "holiday") {
+        console.log("sending holiday");        
+        iothub.sendMessage("holiday");
     }
     else {
         console.log("sending solid color");
