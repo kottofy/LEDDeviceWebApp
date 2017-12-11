@@ -32,10 +32,14 @@ router.post('/', function (req, res) {
         console.log("sending stop");        
         iothub.sendMessage("stop");
     }
-    else if(req.body.rainbow == "holiday") {
-        console.log("sending holiday");        
-        iothub.sendMessage("holiday");
+    else if(req.body.rainbow == "holidayWipe") {
+        console.log("sending holidayWipe");        
+        iothub.sendMessage("holidayWipe");
     }
+    // else if(req.body.rainbow == "holidayCycle") {
+    //     console.log("sending holidayCycle");        
+    //     iothub.sendMessage("holidayCycle");
+    // }
     else {
         console.log("sending solid color");
 
