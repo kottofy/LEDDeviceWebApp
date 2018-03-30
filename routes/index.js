@@ -3,43 +3,34 @@ var express = require('express');
 var router = express.Router();
 var iothub = require('../IoTHub.js');
 
-// /* GET home page. */
-// router.get('/', function (req, res) {
-//     // iothub.sendMessage();
-//     res.render('index', { title: 'LED Device' });
-// });
-
 /* GET colors page. */
 router.get('/', function (req, res) {
     res.render('colors', { title: 'Colors' });
 });
 
-//TODO WHY DO I HAVE TWO ROUTES FOR THE SAME THING BRAIN!?
 router.post('/', function (req, res) {
-    console.log("rainbow: " + req.body.rainbow);
+    var method = req.body.method;
+    
+    console.log("method: " + method);
 
-    if (req.body.rainbow == "rainbow") {
+    if (method == "rainbow") {
         iothub.sendMessage("rainbow");
     }
-    else if (req.body.rainbow == "rainbowCycle") {
+    else if (method == "rainbowCycle") {
         iothub.sendMessage("rainbowCycle");
     }
-    else if(req.body.rainbow == "rgb") {
-        console.log("sending rgb");
-        iothub.sendMessage("rgb");
+    else if (method == "rgbWipeCycle") {
+        console.log("sending rgbWipeCycle");
+        iothub.sendMessage("rgbWipeCycle");
     }
-    else if(req.body.rainbow == "stop") {
-        console.log("sending stop");        
+    else if (method == "stop") {
+        console.log("sending stop");
         iothub.sendMessage("stop");
     }
-    else if(req.body.rainbow == "holidayWipe") {
-        console.log("sending holidayWipe");        
+    else if (method == "holidayWipe") {
+        console.log("sending holidayWipe");
         iothub.sendMessage("holidayWipe");
     }
-    // else if(req.body.rainbow == "holidayCycle") {
-    //     console.log("sending holidayCycle");        
-    //     iothub.sendMessage("holidayCycle");
-    // }
     else {
         console.log("sending solid color");
 
