@@ -12,6 +12,7 @@
   "dependencies": {
     "azure-iot-device-http": "^1.1.17",
     "azure-iothub": "^1.1.14",
+    "azure-storage": "^2.8.1",
     "body-parser": "^1.15.0",
     "cookie-parser": "^1.4.0",
     "debug": "^2.2.0",

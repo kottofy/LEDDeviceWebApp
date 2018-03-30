@@ -2,6 +2,7 @@
 var express = require('express');
 var router = express.Router();
 var iothub = require('../IoTHub.js');
+var storage = require('../Storage.js');
 
 /* GET colors page. */
 router.get('/', function (req, res) {
@@ -10,42 +11,43 @@ router.get('/', function (req, res) {
 
 router.post('/', function (req, res) {
     var method = req.body.method;
+    var message =  "";
     
     console.log("method: " + method);
 
     if (method == "rainbow") {
-        iothub.sendMessage("rainbow");
+        message = method;
     }
     else if (method == "rainbowCycle") {
-        iothub.sendMessage("rainbowCycle");
+        message = method;        
     }
     else if (method == "rgbWipeCycle") {
-        console.log("sending rgbWipeCycle");
-        iothub.sendMessage("rgbWipeCycle");
+        message = method;        
     }
     else if (method == "stop") {
-        console.log("sending stop");
-        iothub.sendMessage("stop");
+        message = method;        
     }
     else if (method == "holidayWipe") {
-        console.log("sending holidayWipe");
-        iothub.sendMessage("holidayWipe");
+        message = method;        
     }
     else {
-        console.log("sending solid color");
-
         var rgb = {
             red: req.body.red,
             green: req.body.green,
             blue: req.body.blue
         };
-
         console.log("color: " + JSON.stringify(rgb));
-        iothub.sendMessage(rgb);
+        message = rgb;
+    }
+
+    if (message !== "")
+    {
+        var iotHubMessage = iothub.generateMessage(message);
+        iothub.sendMessage(iotHubMessage);
+        storage.storeMessage(iotHubMessage.getData());       
     }
 
     res.render('colors', { title: 'Colors' });
 });
 
 module.exports = router;
-
